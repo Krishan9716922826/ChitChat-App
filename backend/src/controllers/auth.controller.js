@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { sendWelcomeEmail } = require("../emails/emailHandlers");
 const { ENV } = require("../lib/env");
 
+//signup controller
 const signup = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -71,6 +72,7 @@ const signup = async (req, res) => {
   }
 };
 
+// login controller
 const login = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -119,4 +121,20 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+// logout controller 
+const logout = async (req, res) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      message: "Successfully logged out",
+    });
+  } catch (error) {
+    console.log(error);
+     return res.status(500).json({
+      success: false,
+      message: `Internal server Error`,
+    });
+  }
+}
+
+module.exports = { signup, login, logout };
